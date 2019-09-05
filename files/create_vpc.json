@@ -1,0 +1,51 @@
+{
+  "eventVersion": "1.05",
+  "userIdentity": {
+    "type": "IAMUser",
+    "principalId": "AIDA4BOGSS2V6PUKAU4M4",
+    "arn": "arn:aws:iam::827734529707:user/rb-auto",
+    "accountId": "827734529707",
+    "accessKeyId": "AKIA4BOGSS2VQOZIRYFN",
+    "userName": "rb-auto"
+  },
+  "eventTime": "2019-08-27T20:33:13Z",
+  "eventSource": "ec2.amazonaws.com",
+  "eventName": "CreateVpc",
+  "awsRegion": "eu-west-1",
+  "sourceIPAddress": "92.109.81.211",
+  "userAgent": "aws-sdk-go/1.23.0 (go1.12.6; darwin; amd64) APN/1.0 HashiCorp/1.0 Terraform/0.12.6",
+  "requestParameters": {
+    "cidrBlock": "10.100.0.0/16",
+    "instanceTenancy": "default",
+    "amazonProvidedIpv6CidrBlock": false
+  },
+  "responseElements": {
+    "requestId": "cd88c7b0-4070-4c4e-ad83-2690edab0c1c",
+    "vpc": {
+      "vpcId": "vpc-07411ca85ada7256c",
+      "state": "pending",
+      "ownerId": "827734529707",
+      "cidrBlock": "10.100.0.0/16",
+      "cidrBlockAssociationSet": {
+        "items": [
+          {
+            "cidrBlock": "10.100.0.0/16",
+            "associationId": "vpc-cidr-assoc-0c7e12a23cf0569ec",
+            "cidrBlockState": {
+              "state": "associated"
+            }
+          }
+        ]
+      },
+      "ipv6CidrBlockAssociationSet": {},
+      "dhcpOptionsId": "dopt-1fe3a779",
+      "instanceTenancy": "default",
+      "tagSet": {},
+      "isDefault": false
+    }
+  },
+  "requestID": "cd88c7b0-4070-4c4e-ad83-2690edab0c1c",
+  "eventID": "d91ce1ed-a3c0-40b1-ad98-73aa77d5dc89",
+  "eventType": "AwsApiCall",
+  "recipientAccountId": "827734529707"
+}
