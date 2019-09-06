@@ -18,7 +18,7 @@
 module "inspect" {
   source = "./inspect"
 
-  prefix       = var.prefix
-  default_tags = var.default_tags
-  region       = data.aws_region.current.name
+  prefix       = "${var.prefix}"
+  default_tags = "${var.default_tags}"
+  region       = "${data.aws_region.current.name}"
 }

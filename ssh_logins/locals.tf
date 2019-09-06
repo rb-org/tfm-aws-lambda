@@ -9,6 +9,6 @@ locals {
   lambda_name = "ssh-invalid-login"
 
   env_vars = {
-    REGION = var.region
+    REGION = "${var.region}"
   }
 }
