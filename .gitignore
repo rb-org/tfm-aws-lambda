@@ -9,3 +9,7 @@
 *secrets.tfvars
 
 .DS_Store
+
+files/cw_event.json
+
+files/template.py

@@ -22,13 +22,13 @@ data "aws_iam_policy_document" "lambda_policy_doc" {
     resources = ["${aws_cloudwatch_log_group.main.arn}"]
   }
 
-  statement {
-    actions = [
-      "*"
-    ]
-    effect    = "Allow"
-    resources = ["*"]
-  }
+  # statement {
+  #   actions = [
+  #     "*"
+  #   ]
+  #   effect    = "Allow"
+  #   resources = ["*"]
+  # }
 }
 
 
