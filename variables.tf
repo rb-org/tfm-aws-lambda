@@ -11,6 +11,7 @@ variable "default_tags" {
   default = {
     Github-Repo = "rb-org/tfm-aws-lambda"
     Terraform   = "true"
+    Creator     = "rupert"
   }
 }
 # Account IDs

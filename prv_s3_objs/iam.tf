@@ -1,0 +1,40 @@
+# Lambda Execution Policy
+data "aws_iam_policy_document" "lambda_exec_policy_doc" {
+  statement {
+    actions = [
+      "s3:GetObjectAcl",
+      "s3:PutObjectAcl"
+    ]
+    effect    = "Allow"
+    resources = ["${aws_s3_bucket.private.arn}/*"]
+  }
+  statement {
+    actions = [
+      "logs:DescribeLogGroups",
+      "logs:DescribeLogStreams"
+    ]
+    effect    = "Allow"
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_policy" "lambda_exec_policy" {
+  name   = "${local.lambda_name}-lambda-policy"
+  policy = "${data.aws_iam_policy_document.lambda_exec_policy_doc.json}"
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_exec_policy" {
+  role       = "${module.lambda.iam_role_name}"
+  policy_arn = "${aws_iam_policy.lambda_exec_policy.arn}"
+}
+
+
+
+# Allow CW to trigger Lambda
+resource "aws_lambda_permission" "cloudwatch" {
+  statement_id  = "AllowExecutionFromCloudWatch"
+  action        = "lambda:InvokeFunction"
+  function_name = "${module.lambda.function_name}"
+  principal     = "events.amazonaws.com"
+  source_arn    = "${aws_cloudwatch_event_rule.main.arn}"
+}
