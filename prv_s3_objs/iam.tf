@@ -30,11 +30,4 @@ resource "aws_iam_role_policy_attachment" "lambda_exec_policy" {
 
 
 
-# Allow CW to trigger Lambda
-resource "aws_lambda_permission" "cloudwatch" {
-  statement_id  = "AllowExecutionFromCloudWatch"
-  action        = "lambda:InvokeFunction"
-  function_name = "${module.lambda.function_name}"
-  principal     = "events.amazonaws.com"
-  source_arn    = "${aws_cloudwatch_event_rule.main.arn}"
-}
+

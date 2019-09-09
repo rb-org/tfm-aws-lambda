@@ -28,12 +28,12 @@ resource "aws_cloudwatch_event_rule" "main" {
     "eventName": [
       "PutObject",
       "PutObjectAcl"
-    ]
-  },
-  "requestParameters": {
-    "bucketName": [
-      "${aws_s3_bucket.private.id}"
-    ]
+    ],
+    "requestParameters": {
+      "bucketName": [
+        "${aws_s3_bucket.private.id}"
+      ]
+    }
   }
 }
 PATTERN
@@ -46,4 +46,12 @@ resource "aws_cloudwatch_event_target" "main" {
   arn       = "${module.lambda.arn}"
   # input_path = "$.detail.responseElements.vpc.vpcId"
 
+}
+# Allow CW to trigger Lambda
+resource "aws_lambda_permission" "cloudwatch" {
+  statement_id  = "AllowExecutionFromCloudWatch"
+  action        = "lambda:InvokeFunction"
+  function_name = "${module.lambda.function_name}"
+  principal     = "events.amazonaws.com"
+  source_arn    = "${aws_cloudwatch_event_rule.main.arn}"
 }
