@@ -1,19 +1,15 @@
 import boto3
 import os
-# import json
 import datetime
 from datetime import datetime, timezone, timedelta
 from dateutil.parser import parse
 from botocore.exceptions import ClientError
 
 client = boto3.client('iam')
-# iam = boto3.resource('iam')
 
 # Calculate age
 x_days = 60
 older_than_x_days = datetime.now(timezone.utc)-timedelta(days=x_days)
-
-# Function
 
 
 def lambda_handler(event, context):
@@ -39,6 +35,7 @@ def lambda_handler(event, context):
                     #     AccessKeyId=key_id
                     # )
                     response = client.update_access_key(
+                        DryRun=True,
                         UserName=user['UserName'],
                         AccessKeyId=key_id,
                         Status='Inactive'
