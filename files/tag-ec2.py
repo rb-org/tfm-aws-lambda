@@ -16,7 +16,7 @@ def lambda_handler(event, context):
     try:
         # print(event)
         # Create EC2
-        if event['detail']['responseElements']['eventName'] == 'RunInstances':
+        if event['detail']['eventName'] == 'RunInstances':
             items = event['detail']['responseElements']['instancesSet']['items']
             for item in items:
                 resource_ids.append(item['instanceId'])
@@ -35,23 +35,21 @@ def lambda_handler(event, context):
                     vol_id = vol['VolumeId']
                     resource_ids.append(vol_id)
         # Create EBS
-        elif event['detail']['responseElements']['eventName'] == 'CreateVolume':
+        elif event['detail']['eventName'] == 'CreateVolume':
             resource_ids.append(
                 event['detail']['responseElements']['volumeId'])
 
         # Create Snapshot
-        elif event['detail']['responseElements']['eventName'] == 'CreateImage':
+        elif event['detail']['eventName'] == 'CreateSnapshot':
             resource_ids.append(
                 event['detail']['responseElements']['snapshotId'])
 
         else:
-            print('Not supported')
+            print('Not supported: {0}'.format(event['detail']['eventName']))
 
         # Create Tags
         client.create_tags(
-            Resources=[
-                resource_ids
-            ],
+            Resources=resource_ids,
             Tags=[
                 {
                     'Key': 'SecureTag',
