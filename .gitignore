@@ -19,3 +19,7 @@ files/test1 copy.txt
 files/test1.txt
 
 files/test2.txt
+
+files/create_ec2.json
+
+files/volumes.json
